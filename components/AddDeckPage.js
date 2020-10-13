@@ -12,13 +12,23 @@ class AddDeckPage extends React.Component {
 
   handleSubmission = () => {
     if(this.state.deckName) {
-      const deckName = this.state.deckName;
+      // Make sure there are no extra spaces in the beginning to throw off 
+      // the alphabetization on the deck listing page.
+      const deckName = this.state.deckName.trim();
       this.props.addDeck(deckName);
       this.setState({
         deckName: ""
       }, () => {
-        this.props.navigation.navigate('Deck Home', {
-          deckName: deckName
+        this.props.navigation.reset({
+          index: 1,
+          routes: [
+            {name: "Home", screen: "List Decks" },
+            { name: 'Deck Home',
+              params: {
+                deckName
+              }
+            }
+          ]
         });
       }) 
     }
@@ -38,7 +48,7 @@ class AddDeckPage extends React.Component {
 
         <TouchableOpacity style={ [StyleSheet.appButtonContainer] } 
         onPress={ this.handleSubmission } >
-          <Text style={StyleSheet.appButtonText} >Submit</Text>
+          <Text style={StyleSheet.appButtonText} >Create Deck</Text>
         </TouchableOpacity>
       </View>
     );   

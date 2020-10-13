@@ -17,7 +17,10 @@ class Quiz extends React.Component {
   }
 
   toggleShowInfo = () => {
-    this.setState((curState) => ({ showInfo: (!curState.showInfo)  }), () => { this.props.updateGame(this.state, this.cardIndex) } );
+    this.setState((curState) => 
+      ({ showInfo: (!curState.showInfo)  }), 
+      () => { this.props.updateGame(this.state, this.cardIndex) } 
+    );
   }
 
   toggleDidGuess = () => {

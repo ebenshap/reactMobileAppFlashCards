@@ -6,22 +6,24 @@ import { clearLocalNotification, setLocalNotification } from '../utils/helper'
 function retakeQuizClick ({navigation, deckName, cards}) {
   // Clear the stack and add home, and deckHome and previous routes in the 
   // stack so the user can exit out of the quiz using the back buttons.
+
   navigation.reset({
-    index: 1,                
+    index: 2,                
     routes: [
       { name: 'Home' },
       { name: 'Deck Home',
-      params: {
-        deckName
+        params: {
+          deckName
+        }
+      }, 
+      { name: 'Quiz',
+        params: {
+          cards,
+          cardIndex: 0,
+          deckName
+        }
       }
-    }, 
-    { name: 'Quiz',
-      params: {
-        cards,
-        cardIndex: 0,
-        deckName
-      }
-    }],
+    ]
   });
 }
 
@@ -37,7 +39,7 @@ function handleClearNotification() {
 export default function ScoreCard({navigation, deckName, cards, score }) {
   return <View>
     <Text>End of the Quiz</Text>
-    <Text>Score: {score}</Text>
+    <Text>Score: {score} out of {cards.length}</Text>
     
     <TouchableOpacity style={ [StyleSheet.appButtonContainer] } 
         onPress={ () => {

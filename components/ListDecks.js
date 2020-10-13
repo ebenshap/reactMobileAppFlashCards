@@ -5,11 +5,12 @@ import StyleSheet from './Styles'
 
 // This is where it makes sense to first display data.
 function ListDecks(props) {
-  let decks = Object.keys(props.decks);
+  const { deckKeysSorted } = props;
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>List Decks:</Text>
-      { decks.map(deckName => <TouchableOpacity key={deckName}  onPress={() => { props.navigation.navigate("Deck Home", {deckName })}} > 
+      { deckKeysSorted.map(deckName => <TouchableOpacity key={deckName}  
+      onPress={() => { props.navigation.navigate("Deck Home", {deckName })}} > 
         <Text style={StyleSheet.underLineText} >{deckName}</Text>
         <Text style={{color: 'gray'}}>{ props.decks[deckName].length } cards</Text>
       </TouchableOpacity>  ) } 
@@ -18,8 +19,14 @@ function ListDecks(props) {
 }
 
 function mapStateToProps ({decks}) {
+  let deckKeysSorted = Object.keys(decks);
+  deckKeysSorted = deckKeysSorted.sort(function (a, b) {
+    return a.toLowerCase().localeCompare(b.toLowerCase());
+  });
+
   return {
-    decks
+    decks,
+    deckKeysSorted
   }
 }
 
