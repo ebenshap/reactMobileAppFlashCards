@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Text, View, TextInput, Button } from 'react-native';
-import { addDeck } from '../actions';
+import { Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { addDeck } from '../actions/decks';
 import { connect } from 'react-redux'; 
+import StyleSheet from './Styles'
 
-// I had not thougt of this. How is a react native screen passed props.
 class AddDeckPage extends React.Component {
 
   state={
@@ -17,7 +17,7 @@ class AddDeckPage extends React.Component {
       this.setState({
         deckName: ""
       }, () => {
-        this.props.navigation.navigate('DeckHome', {
+        this.props.navigation.navigate('Deck Home', {
           deckName: deckName
         });
       }) 
@@ -33,8 +33,13 @@ class AddDeckPage extends React.Component {
           onChangeText={(value) => {this.setState({ deckName: value })}} 
           name="deckName" 
           placeholder="Enter Deck Name"
+          style={[StyleSheet.input]}
           value={this.state.deckName}/>
-        <Button title="Submit" onPress={ this.handleSubmission } />
+
+        <TouchableOpacity style={ [StyleSheet.appButtonContainer] } 
+        onPress={ this.handleSubmission } >
+          <Text style={StyleSheet.appButtonText} >Submit</Text>
+        </TouchableOpacity>
       </View>
     );   
   }

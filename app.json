@@ -1,7 +1,10 @@
 {
   "expo": {
-    "name": "nestedNav",
-    "slug": "nestedNav",
+    "android": {
+      "useNextNotificationsApi": true
+    },
+    "name": "reactMobileAppFlashCards",
+    "slug": "reactMobileAppFlashCards",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
